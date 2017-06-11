@@ -1,7 +1,6 @@
 import path from 'path';
 
 import resolve from 'resolve';
-import getRealPath from './getRealPath';
 
 
 export function nodeResolvePath(modulePath, basedir, extensions) {
@@ -52,7 +51,7 @@ export function mapPathString(nodePath, state) {
   const currentFile = state.file.opts.filename;
   const opts = state.opts;
 
-  const modulePath = getRealPath(sourcePath, currentFile, opts);
+  const modulePath = opts.getRealPath(sourcePath, currentFile, opts);
   if (modulePath) {
     nodePath.replaceWith(state.types.stringLiteral(modulePath));
   }

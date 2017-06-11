@@ -5,6 +5,8 @@ import findBabelConfig from 'find-babel-config';
 import glob from 'glob';
 import pkgUp from 'pkg-up';
 
+import defaultGetRealPath from './getRealPath';
+
 
 const defaultExtensions = ['.js', '.jsx', '.es', '.es6', '.mjs'];
 const defaultTransformedFunctions = [
@@ -112,6 +114,7 @@ export default function normalizeOptions(currentFile, opts) {
   const alias = normalizeAlias(opts.alias);
   const transformFunctions = normalizeTransformedFunctions(opts.transformFunctions);
   const extensions = opts.extensions || defaultExtensions;
+  const getRealPath = opts.getRealPath || defaultGetRealPath;
 
   return {
     cwd,
@@ -119,5 +122,6 @@ export default function normalizeOptions(currentFile, opts) {
     alias,
     transformFunctions,
     extensions,
+    getRealPath,
   };
 }

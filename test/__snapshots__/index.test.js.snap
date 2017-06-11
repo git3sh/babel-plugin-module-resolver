@@ -5,6 +5,7 @@ Array [
   "alias",
   "cwd",
   "extensions",
+  "getRealPath",
   "root",
   "transformFunctions",
 ]

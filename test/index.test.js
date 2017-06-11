@@ -818,4 +818,44 @@ describe('module-resolver', () => {
       });
     });
   });
+
+  describe('getRealPath', () => {
+    it('should work with a custom function', () => {
+      const rootTransformerOpts = {
+        babelrc: false,
+        plugins: [
+          [plugin, {
+            root: './test/testproject/src',
+            getRealPath() {
+              return 'real path';
+            },
+          }],
+        ],
+      };
+
+      testWithImport(
+        'app',
+        'real path',
+        rootTransformerOpts,
+      );
+    });
+
+    it('should work with the original function', () => {
+      const rootTransformerOpts = {
+        babelrc: false,
+        plugins: [
+          [plugin, {
+            root: './test/testproject/src',
+            getRealPath,
+          }],
+        ],
+      };
+
+      testWithImport(
+        'app',
+        './test/testproject/src/app',
+        rootTransformerOpts,
+      );
+    });
+  });
 });
